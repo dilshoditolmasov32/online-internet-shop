@@ -1,0 +1,24 @@
+@import "vendors/cart.scss";
+@import "layout/header.scss";
+@import "layout/footer.scss";
+@import "layout/form.scss";
+@import "layout/nav.scss";
+@import "components/slider.scss";
+@import "components/slide.scss";
+@import "vendors/layout.scss";
+@import "base/font";
+
+
+body {
+  &.modal-open {
+    overflow: hidden;
+  }
+}
+
+.header {
+  z-index: 100;
+}
+
+.auth__outer {
+  z-index: 9999 !important;
+}

@@ -1,0 +1,289 @@
+.cart {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 1000px;
+    align-items: center;
+    position: relative;
+
+    &__left {
+
+        position: relative;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        &-img {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: #D9D9D9;
+            border-radius: 10px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &-inp {
+            position: relative;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #D9D9D9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:checked {
+                background-color: var(--primary-color);
+                border-color: var(--primary-color);
+            }
+
+            &:checked::after {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 10px;
+                height: 10px;
+                background-color: white;
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                transition: transform 0.2s ease;
+            }
+        }
+
+        &-desc {
+            position: relative;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            &__code {
+                margin-top: 3px;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 22.4px;
+                color: #828282;
+
+            }
+
+            &__title {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 21.6px;
+
+                & span {
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 13.2px;
+                    color: var(--white);
+                    background: var(--sale);
+                    padding: 4px 8px;
+                    border-radius: 18px;
+
+                }
+
+
+            }
+
+            &__text {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                color: #616161;
+
+            }
+        }
+    }
+
+    &__right {
+        &-del {
+            cursor: pointer;
+        }
+
+        display: flex;
+        align-items: center;
+        gap: 48px;
+
+        &-counter {
+
+            display: flex;
+            gap: 18px;
+            align-items: center;
+
+            &__btn {
+                padding: 16px;
+                width: 36px;
+                height: 36px;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                background: var(--white);
+                border-radius: 10px;
+                outline: none;
+                border: none;
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 25.36px;
+
+
+            }
+
+            &__title {
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 25.36px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.cartadapt {
+    width: 100%;
+    display: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    flex-direction: column;
+    gap: 15px;
+
+    &__desc {
+        display: flex;
+        justify-content: space-between;
+        width: 430px;
+
+        &-left {
+
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            &__code {
+                margin-top: 4px;
+                font-weight: 400;
+                font-size: 12px;
+                color: #828282;
+
+            }
+
+            &__title {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 21px;
+                letter-spacing: 0%;
+                max-width: 250px;
+                color: #616161;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+            }
+
+            &__price {
+                font-weight: 700;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                font-size: 18px;
+                line-height: 21.6px;
+                letter-spacing: -0.54px;
+
+                & span {
+                    padding: 4px 8px 2px;
+                    background: var(--sale);
+                    border-radius: 18px;
+                    color: var(--white);
+                    display: flex;
+                    font-weight: 700;
+                    font-size: 14px;
+
+                }
+            }
+        }
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: space-evenly;
+
+        &-counter {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+    }
+
+}
+
+
+
+@media screen and (max-width: 480px) {
+    .cart {
+        display: none;
+    }
+
+    .cartadapt {
+        display: flex;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .cartadapt {
+        max-width: 390px;
+
+
+        &__desc {
+            max-width: 390px;
+
+            &-left {
+                &__title {
+                    max-width: 200px;
+                }
+            }
+
+            gap: 10px;
+            justify-content: start;
+            padding-left: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .cartadapt {
+        max-width: 300px;
+
+        &__desc {
+            max-width: 300px;
+            padding: 0;
+
+            &-left {
+                &__price {
+                    align-items: start;
+                    flex-direction: column;
+                }
+                &__title{
+                    max-width: 160px;
+                }
+            }
+        }
+    }
+}

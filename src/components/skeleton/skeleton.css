@@ -1,0 +1,39 @@
+
+.skeleton__wrapper {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  
+  .skeleton__image {
+    width: 280px;
+    height: 250px;
+    background: #ddd;
+    border-radius: 10px;
+  }
+  
+  .skeleton__title,
+  .skeleton__price {
+    width: 90%;
+    height: 30px;
+    background: #ddd;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .skeleton__price {
+    width: 70%;
+  }
+  
+  .skeleton__anime {
+    background: linear-gradient(90deg, #f7f7f7, #ddd, #f7f7f7);
+    background-size: 200%;
+    animation: skeletonAnime 1s linear 0s infinite;
+  }
+  
+  @keyframes skeletonAnime {
+    to {
+      background-position: 200%;
+    }
+  }

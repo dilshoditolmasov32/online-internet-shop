@@ -1,0 +1,30 @@
+.no-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 50px;
+  &__text {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 500;
+    max-width: 474px;
+    line-height: 24px;
+    color: var(--gray);
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28.8px;
+    text-align: center;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+}

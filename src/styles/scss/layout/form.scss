@@ -1,0 +1,155 @@
+.form {
+  background: var(--light-gray);
+  position: relative;
+
+  &__wrap {
+    display: flex;
+    padding: 48px 0 80px;
+  }
+
+  &__img {
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 80%;
+      transform: translateX(-50%) !important;
+      z-index: 0;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__desc {
+    max-width: 475px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &-txts {
+      &__title {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 82px;
+        letter-spacing: -0.05em;
+        color: var(--primary-color);
+      }
+
+      &__text {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21.6px;
+      }
+    }
+
+    &-main {
+      max-width: 472px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &__inp {
+        padding: 24px 30px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        text-transform: capitalize;
+
+        &::placeholder {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 18.75px;
+          text-transform: capitalize;
+        }
+      }
+
+      &__btn {
+        padding: 24px;
+        color: var(--white);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        background: var(--primary-color);
+      }
+    }
+  }
+}
+@media screen and (max-width:770px) {
+   .form {
+    &__wrap {
+      padding: 40px 0 48px;
+    }
+
+    &__img {
+      display: none;
+    }}
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    &__wrap {
+      padding: 36px 0 40px;
+    }
+
+    &__img {
+      display: none;
+    }
+
+    &__desc {
+      &-main {
+        &__inp {
+          padding: 16px 30px;
+          border-radius: 10px;
+          border: none;
+          outline: none;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 18.75px;
+          text-transform: capitalize;
+
+          &::placeholder {
+            font-size: 16px;
+          }
+        }
+         &__btn {
+        padding: 16px 18px;
+        color: var(--white);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        background: var(--primary-color);
+      }
+      }
+
+      &-txts {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        &__title {
+          font-weight: 600;
+          font-size: 30px;
+          line-height: 18px;
+          letter-spacing: 0;
+        }
+
+        &__text {
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 20px;
+          letter-spacing: 0;
+        }
+      }
+    }
+  }
+}

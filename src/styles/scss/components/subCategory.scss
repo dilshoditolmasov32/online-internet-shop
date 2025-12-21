@@ -1,0 +1,58 @@
+$color_1: #10355b;
+$color_2: #000000;
+$color_3: #7d7d7d;
+$font-family_1: "Neometric";
+
+
+.accordion-menu h2{
+font-weight: 600;
+font-size: 24px;
+line-height: 22px;
+letter-spacing: 0%;
+vertical-align: middle;
+margin-bottom: 25px;
+
+}
+.price-sort {
+  margin-top: 50px;
+  h4 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: $color_3;
+    margin-bottom: 20px;
+  }
+}
+.price-container {
+  display: flex;
+  gap: 6px;
+}
+.subcategory-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  width: 100%;
+  transition: color 0.5s ease-in-out;
+  &:hover {
+    p {
+      color: $color_3;
+    }
+  }
+  p {
+    &:active {
+      color: $color_2;
+    }
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: $color_3;
+    width: 100%;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+}

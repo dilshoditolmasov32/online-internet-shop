@@ -1,0 +1,37 @@
+.city {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    &__choose {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+
+        &-text {
+            font-weight: 500;
+            font-size: 14px;
+            color: #818181;
+        }
+    }
+
+    &__disabled {
+        &-text {
+            width: 100%;
+            transition: linear all 0.3s;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16.8px;
+            letter-spacing: 0%;
+            z-index: inherit;
+            border-bottom: 1px solid #eaeaea;
+            padding: 12px 20px;
+            background: var(--body);
+            max-height: 48px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+    }
+}

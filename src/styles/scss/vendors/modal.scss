@@ -1,0 +1,89 @@
+
+$color-white: #ffffff;
+$color-primary: var(--primary-color);
+$color-overlay: rgba(0, 0, 0, 0.6);
+$spacing-s: 10px;
+$spacing-m: 20px;
+$spacing-l: 25px;
+$border-radius: 12px;
+
+.modal-logout {
+    background: $color-overlay; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100svh;
+    z-index: 10000;
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+
+    &__wrapper { // Element: .modal-logout__wrapper
+        background: $color-white; // O'zgaruvchi
+        padding: $spacing-m $spacing-l; // 20px 25px
+        display: flex;
+        flex-direction: column;
+        gap: 30px; // Qismlar orasidagi ajratish yaxshi
+        border-radius: $border-radius; // O'zgaruvchi
+        width: 90%; // Kichik ekranlar uchun kenglik
+        max-width: 450px; // Modal kengligini chegaralash (UX)
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); // Soyalar qo'shish (UI)
+        
+        // Kichikroq ekranlar uchun paddingni optimallashtirish
+        @media (max-width: 480px) {
+            padding: 15px 20px;
+        }
+    }
+
+    &__title { // Element: .modal-logout__title
+        font-weight: 700; // 600 o'rniga ko'proq ajratish
+        font-size: 26px; // Katta va o'qiluvchanroq
+        color: var(--text-color-dark); // Sarlavha rangini aniqlash
+        margin: 0; // Margindan qutulish
+    }
+    
+    &__message { // Yangi Element: tasdiqlash xabari uchun
+        font-size: 16px;
+        color: var(--text-color-secondary);
+        margin: 0;
+    }
+
+    &__actions { // Element: .modal-logout__actions (tugmalar bloki)
+        display: flex;
+        justify-content: flex-end; // Tugmalarni o'ng tomonga siljitish (standart UX)
+        gap: $spacing-s; // 10px
+    }
+
+    &__button { 
+        min-width: 90px; 
+        outline: none;
+        border: none;
+        padding: 12px 15px;
+        font-weight: 600; // O'qiluvchanlik uchun qalinroq
+        font-size: 15px;
+        border-radius: 10px;
+        color: $color-white; // O'zgaruvchi
+        cursor: pointer; // UX: bosilishi mumkinligini bildiradi
+        transition: background-color 0.2s ease; // UI: animatsiya
+
+        &--cancel { 
+            background:var(--primary-color); 
+            
+            &:hover {
+                   background:var(--primary-color);
+            }
+        }
+        
+        &--confirm {
+               background:#CA0808;
+            
+            &:hover {
+               background:#CA0808;
+            }
+        }
+    }
+}

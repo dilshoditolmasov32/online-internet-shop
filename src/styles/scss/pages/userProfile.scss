@@ -1,0 +1,496 @@
+$color-main: #10355b;
+$color-red: #ca0808;
+$color-gray: #7d7d7d;
+$color-black: #111111;
+$bg-light: #f5f7fb;
+$border-soft: #e3e6ed;
+
+$container-width: 1450px;
+
+.profile-page {
+  background-color: $bg-light;
+  min-height: 100vh;
+  padding: 50px 16px 60px;
+  color: $color-black;
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    margin-top: 20px;
+  }
+
+  &__container {
+    max-width: $container-width;
+    margin: 0 auto;
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: $color-gray;
+    gap: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+
+  &__back-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    color: $color-main;
+    font-weight: 400;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+  }
+
+  &__crumb {
+    padding: 9px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #7d7d7d;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &__layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+
+.profile-sidebar {
+  flex: 0 0 350px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &__item {
+    width: 100%;
+    padding: 13px 18px;
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    background-color: #fff;
+    cursor: pointer;
+    color: $color-black;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 12px;
+    &--active {
+      background-color: $color-main;
+      color: #ffffff;
+    }
+
+    &--logout {
+      color: $color-red;
+      margin-top: 4px;
+    }
+
+    &:hover:not(&--active) {
+      background-color: rgba(16, 53, 91, 0.06);
+    }
+  }
+}
+
+.profile-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 18px 20px 22px;
+  box-shadow: 0 2px 8px rgba(10, 26, 66, 0.06);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9f1fb;
+
+    &--user::before {
+      content: "👤";
+      font-size: 16px;
+    }
+    &--location::before {
+      content: "📍";
+      font-size: 16px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: 16px;
+
+    &--two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+/* PROFILE FIELDS */
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+
+  &__label {
+    color: $color-gray;
+  }
+
+  &__input {
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid $border-soft;
+    padding: 0 12px;
+    font-size: 14px;
+    outline: none;
+
+    &:focus {
+      border-color: $color-main;
+      box-shadow: 0 0 0 1px rgba(16, 53, 91, 0.15);
+    }
+
+    &--phone {
+      border-left: none;
+      border-radius: 0 6px 6px 0;
+    }
+  }
+
+  &__helper {
+    font-size: 11px;
+    color: $color-gray;
+    margin-top: 2px;
+  }
+
+  &__phone-wrapper {
+    display: flex;
+    align-items: stretch;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid $border-soft;
+  }
+
+  &__phone-code {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    border-right: 1px solid $border-soft;
+    font-size: 14px;
+    color: $color-black;
+    background-color: #f8fafc;
+  }
+}
+
+/* ADDRESS */
+
+.profile-address {
+  margin-top: 6px;
+
+  &__add-btn {
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 12px;
+    font-size: 14px;
+    background-color: #7a93b0;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  &__form {
+    margin-top: 16px;
+  }
+}
+
+/* ORDERS */
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(10, 26, 66, 0.06);
+  padding: 16px 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__status-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+
+    &--success {
+      border-color: #00a856;
+    }
+    &--danger {
+      border-color: $color-red;
+    }
+    &--warning {
+      border-color: #f6aa1c;
+    }
+  }
+
+  &__status-text {
+    color: $color-black;
+  }
+
+  &__toggle-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border-soft;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: $color-gray;
+  }
+
+  &__meta-label {
+    margin-bottom: 2px;
+  }
+
+  &__meta-value {
+    font-size: 13px;
+    color: $color-black;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 10px;
+  align-items: center;
+
+  &__image {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__info {
+    font-size: 13px;
+  }
+
+  &__title {
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  &__subtitle {
+    color: $color-gray;
+    margin-bottom: 2px;
+  }
+
+  &__id {
+    font-size: 12px;
+    color: $color-gray;
+  }
+
+  &__price-wrap {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    background-color: $color-red;
+    color: #ffffff;
+  }
+
+  &__price {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1024px) {
+  .profile-page__layout {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    flex: 0 0 auto;
+    display: flex;
+    padding: 6px;
+    gap: 4px;
+
+    &__item {
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  .profile-card__grid--two {
+    grid-template-columns: 1fr;
+  }
+
+  .order-card__meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+// @media (max-width: 768px) {
+//   .profile-page {
+//     padding-inline: 12px;
+//   }
+
+//   .profile-page__title {
+//     font-size: 20px;
+//   }
+
+//   .order-item {
+//     grid-template-columns: 56px 1fr;
+//     grid-template-rows: auto auto;
+//   }
+
+//   .order-item__price-wrap {
+//     grid-column: 1 / -1;
+//     align-items: flex-end;
+//   }
+// }
+
+@media (max-width: 481px) {
+  .profile-page {
+    padding: 20px 12px;
+
+    &__layout{
+      width: 100%;
+    }
+
+    &__title {
+      font-weight: 500;
+      font-size: 16px !important;
+      line-height: 16px;
+      letter-spacing: 0%;
+    }
+
+    .profile-sidebar {
+      border-radius: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 0;
+      gap: 10px;
+      &__item {
+        flex: 1;
+        width: 100%;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        padding: 10px 14px;
+        text-align: left;
+        border: none;
+        background-color: #fff;
+        color: #000000  ;
+        border-radius: 10px;
+        &--logout{
+          color: #ca0808;
+        }
+      }
+    }
+  }
+
+  .order-item {
+    grid-template-columns: 56px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .order-item__price-wrap {
+    grid-column: 1 / -1;
+    align-items: flex-end;
+  }
+}

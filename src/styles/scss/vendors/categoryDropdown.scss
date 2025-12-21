@@ -1,0 +1,45 @@
+.cat {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+    &__cont {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__text {
+        font-weight: 400;
+
+        font-size: 14px;
+        border-radius: 12px;
+        padding: 12px;
+        transition: all linear 0.3s;
+    }
+        &__text:hover {
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: var(--white);
+
+        }
+
+    &__active {
+        transition: all linear 0.2s;
+
+        transform: rotate(-180deg);
+    }
+
+    &__chevron {
+        transition: all linear 0.2s;
+
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 400;
+        font-size: 16px;
+    }
+}

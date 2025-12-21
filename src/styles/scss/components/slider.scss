@@ -1,0 +1,55 @@
+#slayder-component .swiper {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 20px;
+  width: 520px;
+}
+
+#slayder-component .swiper-slide {
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+#slayder-component .mySwiper2 {
+  height: 80%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+#slayder-component .mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+#slayder-component .mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.5;
+  border-radius: 20px;
+}
+
+#slayder-component .mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+#slayder-component .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+@media screen and (max-width:770px) {
+  #slayder-component .swiper {
+  max-width: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+
+
+}

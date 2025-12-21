@@ -1,0 +1,65 @@
+.citydrop {
+  user-select: none;
+  position: relative;
+
+  &-button {
+    padding: 24px 30px;
+    background: var(--white);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &-list {
+    margin-top: 5px;
+    background: var(--white);
+    border-radius: 10px;
+    max-height: 300px;
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    overflow: scroll;
+    z-index: 10000;
+    color: #7d7d7d;
+    cursor: pointer;
+
+    &__element {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 30px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18.75px;
+    }
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .citydrop {
+    &-button {
+      padding: 16px 18px;
+    }
+
+    &-list {
+      margin-top: 5px;
+      background: var(--white);
+      border-radius: 10px;
+      max-height: 300px;
+      position: absolute;
+      width: 100%;
+      overflow: scroll;
+      z-index: 10000;
+      color: #7d7d7d;
+      cursor: pointer;
+
+      &__element {
+        padding: 16px 18px;
+      }
+    }
+  }
+}

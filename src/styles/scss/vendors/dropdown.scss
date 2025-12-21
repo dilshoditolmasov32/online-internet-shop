@@ -1,0 +1,79 @@
+.city-dropdown {
+    width: 100%;
+    position: relative;
+}
+
+.dropdown-container {
+    position: relative;
+    padding: 24px 30px;
+    border-radius: 8px;
+    background: var(--white);
+}
+
+.dropdown-input {
+    width: 100%;
+    font-size: 16px;
+    color: var(--black);
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    &::placeholder{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18.75px;
+    }
+}
+
+.dropdown-button {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.dropdown-icon {
+    color: #10355B;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.dropdown-option {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    cursor: pointer;
+    color: #7D7D7D;
+}
+
+.dropdown-option.active {
+    background: #10355B;
+    color: white;
+}
+
+.dropdown-no-results {
+    padding: 12px 30px;
+    color: #7D7D7D;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+}

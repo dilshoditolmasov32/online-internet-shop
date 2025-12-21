@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Neometric", sans-serif !important;
+}
+
+:root{
+  scroll-behavior: smooth;
+}
+
+button{
+  background: none;
+  outline: none;
+  border: none;
+}
+
+
+.container {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative ;
+  overflow: visible;
+}
+
+@font-face {
+  font-family: "Neometric";
+  src: url(../src/assets//fonts/Neometric.otf) format("otf");
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,44 @@
+.dropbox {
+    position: relative;
+    transition: linear all 0.3s;
+    cursor: pointer;
+
+    &-list {
+        background: var(--white);
+        transition: linear all 0.3s;
+        position: absolute;
+        left: 0;
+        top: 55px;
+        overflow-y: scroll;
+        max-height: 250px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        width: 100%;
+
+        &__element {
+            transition: linear all 0.3s;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16.8px;
+            letter-spacing: 0%;
+            z-index: inherit;
+            border-bottom: 1px solid #eaeaea;
+            padding: 17px 20px;
+        }
+    }
+
+    &-button {
+        padding: 12px 20px;
+        width: 100%;
+        background: var(--body);
+        text-align: left;
+        font-weight: 400;
+        font-size: 16px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+    }
+}

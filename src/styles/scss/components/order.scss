@@ -1,0 +1,359 @@
+.order {
+    &__top {
+        background: var(--white);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        transition: 0.2s linear all;
+
+        &:hover {
+            border: 1px solid var(--primary-color);
+        }
+    }
+
+    &__status {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+
+        &-text {
+            font-family: "NeoM";
+            font-size: 20px;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &-header {
+            font-family: "NeoM";
+            font-size: 30px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 10px;
+        align-items: center;
+    }
+
+    &__info {
+        display: flex;
+        gap: 140px;
+        align-items: center;
+
+        &-element {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            &__text {
+                font-family: "NeoR";
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 24px;
+                color: var(--gray);
+            }
+
+            &__title {
+                display: flex;
+                gap: 20px;
+                font-family: "NeoM";
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 16px;
+
+                &-span {
+                    font-family: "NeoM";
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 16px;
+                }
+
+                &-pricespan {
+                    font-family: "NeoM";
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 16px;
+                    text-decoration: line-through;
+                    color: var(--gray);
+                }
+            }
+        }
+
+       
+    }
+
+    &__bottom {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 5px;
+
+        &-prod {
+            border-bottom: 1px solid var(--border);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-desc {
+            display: flex;
+            gap: 24px;
+
+            &__img {
+                width: 80px;
+                height: 80px;
+                border-radius: 12px;
+            }
+
+            &__wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            &__title {
+                display: flex;
+                gap: 16px;
+                font-family: "NeoM";
+                font-weight: 500;
+                font-size: 18px;
+                padding-top: 10px;
+
+                & span {
+                    padding: 4px 10px;
+                    font-family: "NeoB";
+                    font-weight: 700;
+                    font-size: 14px;
+                    background: var(--sale);
+                    border-radius: 18px;
+                    color: var(--white);
+                }
+            }
+
+            &__text {
+                font-family: "NeoR";
+                font-weight: 400;
+                font-size: 16px;
+                color: var(--gray);
+            }
+        }
+
+        &-price {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 0;
+
+            &__title {
+                font-family: "NeoR";
+                font-weight: 400;
+                font-size: 14px;
+                color: var(--gray);
+            }
+
+            &__text {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                font-family: "NeoM";
+                font-weight: 500;
+                font-size: 16px;
+
+                & span {
+                    color: var(--gray);
+                    text-decoration: line-through;
+                }
+            }
+        }
+    }
+
+    /* По умолчанию .order__bottomadapt скрыт на десктопе */
+    &__bottomadapt {
+        display: none;
+    }
+}
+
+/* ----------- Адаптивка до 480px ----------- */
+@media screen and (max-width: 480px) {
+    .order {
+        /* Прячем десктопный блок, показываем адаптивный */
+        &__bottom {
+            display: none;
+        }
+
+        &__bottomadapt {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--white);
+            overflow: hidden;
+
+            &-prod {
+                display: flex;
+                align-items: center; /* Для вертикального выравнивания */
+                gap: 10px;
+                padding: 15px;
+                border-bottom: 1px solid var(--border);
+
+                /* Можно подправить размеры картинки */
+                .order__bottom-desc__img {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 8px;
+                    object-fit: cover;
+                }
+            }
+
+            &-desc {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+
+                &__wrap {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                &__title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-family: "NeoM";
+                    font-weight: 500;
+                    font-size: 16px; /* уменьшили с 18px для мобильных */
+                    /* ограничим ширину, чтобы не вылазило за края */
+                    max-width: 100%;
+
+                    & span {
+                        border-radius: 12px;
+                        padding: 4px 8px;
+                        background: var(--sale);
+                        font-family: "NeoR";
+                        font-weight: 700;
+                        color: var(--white);
+                        font-size: 14px;
+                        line-height: 13.2px;
+                        letter-spacing: -0.32px;
+                    }
+                }
+
+                &__text {
+                    font-family: "NeoR";
+                    font-weight: 400;
+                    font-size: 14px;
+                    color: #616161;
+                }
+            }
+
+            &-price {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                &__title {
+                    font-family: "NeoR";
+                    font-weight: 400;
+                    font-size: 12px;
+                    color: var(--gray);
+                }
+
+                &__text {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    font-family: "NeoM";
+                    font-weight: 500;
+                    font-size: 14px;
+
+                    & span {
+                        color: var(--gray);
+                        text-decoration: line-through;
+                    }
+                }
+            }
+        }
+
+        &__wrap {
+            position: relative;
+        }
+
+        &__info {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+
+            &-btn {
+                position: absolute;
+                top: -60px;
+                right: 0;
+            }
+        }
+    }
+}
+
+/* ----------- Адаптивка до 440px ----------- */
+@media screen and (max-width: 440px) {
+    .order {
+        &__bottomadapt {
+            &-desc {
+                &__title {
+                    /* Можно убрать justify-content: space-between,
+                       если нужно полностью «столбиком» */
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 4px;
+                }
+            }
+        }
+    }
+}
+
+/* ----------- Адаптивка до 400px ----------- */
+@media screen and (max-width: 400px) {
+    .order {
+        &__bottomadapt {
+            &-desc {
+                &__title {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    max-width: 150px;
+                }
+            }
+        }
+    }
+}
+
+/* ----------- Адаптивка до 340px ----------- */
+@media screen and (max-width: 340px) {
+    .order {
+        &__status {
+            gap: 5px;
+            &-text,
+            &-header {
+                max-width: 190px;
+            }
+        }
+
+        &__bottomadapt {
+            &-desc {
+                &__title {
+                    max-width: 105px;
+                }
+            }
+        }
+    }
+}
