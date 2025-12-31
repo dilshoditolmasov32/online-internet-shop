@@ -4,19 +4,12 @@ import home from "../../assets/img/home.svg";
 import cart from "../../assets/img/cart.svg";
 import userLogin from "../../assets/img/user-login.svg";
 import search from "../../assets/img/search-mobile.svg";
-import "../../styles/scss/components/mediaNav.scss";
 import { useTranslation } from "react-i18next";
-import useBasket from "../../hooks/useBasket.jsx";
 import useAuthMe from "../../hooks/useAuthMe.jsx";
 
 export default function MediaNav() {
   const { t } = useTranslation();
-  const { basket, fetchBasket } = useBasket();
   const { userMe } = useAuthMe();
-
-  React.useEffect(() => {
-    fetchBasket();
-  }, []);
 
   return (
     <div className="media">
@@ -71,7 +64,7 @@ export default function MediaNav() {
           className={({ isActive }) =>
             isActive ? "media__link choosen" : "media__link"
           }
-          to="/basket"
+          to="/cart"
         >
           <svg
             width={20}
@@ -97,7 +90,7 @@ export default function MediaNav() {
             />
           </svg>
           <p className="media__link-text">{t("cart")}</p>
-          {basket.length !== 0 && <span>{basket.length}</span>}
+          {/* {basket.length !== 0 && <span>{basket.length}</span>} */}
         </NavLink>
 
         <NavLink

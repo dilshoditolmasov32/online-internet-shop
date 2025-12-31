@@ -1,61 +1,57 @@
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import { Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { useBanners } from "../../hooks/useBanner";
+import  BannerSkeleton from "../skeleton/BannerSkeleton"
 import "swiper/swiper-bundle.css";
 
-import banner1 from "../../assets/img/banner-1.svg";
-import banner2 from "../../assets/img/banner-2.svg";
-import banner3 from "../../assets/img/banner-3.svg";
-import banner4 from "../../assets/img/banner-4.svg";
+export default function Slides({ lang = "ru" }) {
+  const { images, loading } = useBanners(lang);
+  const [showLoading, setShowLoading] = useState(true);
 
-import "../../styles/scss/components/slide.scss";
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!loading) {
+        setShowLoading(false);
+        clearInterval(timer);
+      }
+    }, 2500);
 
-export default function Slides({ info, type }) {
-  const banners = [
-    {
-      id: 1,
-      bannerImg: banner1,
-    },
-    {
-      id: 2,
-      bannerImg: banner2,
-    },
-    {
-      id: 3,
-      bannerImg: banner3,
-    },
-    {
-      id: 4,
-      bannerImg: banner4,
-    },
-  ];
-  if (type === "first") {
-    info = info.filter((item) => item.new_type === "first");
-  } else if (type === "second") {
-    info = info.filter((item) => item.new_type === "second");
+    return () => clearInterval(timer);
+  }, [loading]);
+
+  if (showLoading) {
+    return <BannerSkeleton/>
   }
 
   return (
-    <div className="container">
+    <a href="/products" className="container">
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         spaceBetween={50}
         slidesPerView={1}
         autoplay={{
           delay: 2000,
+
           disableOnInteraction: false,
         }}
         loop={true}
         pagination={{ clickable: true }}
-        
         className="slide"
       >
-        {banners?.map((slide) => (
-          <SwiperSlide key={slide.id} className="swiper-slide">
-            <img src={slide.bannerImg} alt="swagger image" />
+        {images.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative h-[400px]">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+         
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </a>
   );
 }

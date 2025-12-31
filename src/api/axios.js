@@ -8,28 +8,13 @@ const api = axios.create({
   },
 });
 
-
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const status = error.response?.status;
-
-    if (status === 401) {
-      // Faqat login sahifasida bo'lmasakgina yo'naltirishimiz kerak
-      if (!window.location.pathname.includes("/login")) {
-        localStorage.removeItem("access_token");
-        window.location.href = "/login";
-      }
-    }
-
-    // Xatoni ob'ekt ko'rinishida qaytarish yaxshi, 
-    // lekin original error ob'ektini ham saqlab qolgan ma'qul
-    return Promise.reject({
-      message: error.response?.data?.detail || error.response?.data?.message || "Server xatosi",
-      status,
-      data: error.response?.data,
-    });
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+
+  return config;
+});
+
 export default api;

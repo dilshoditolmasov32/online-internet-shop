@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import langImg from "../../assets/img/lang.svg"
 import arrow from '../../assets/img/arrow.png'
-import "../../styles/scss/components/lang.scss"
 import { useTranslation } from 'react-i18next';
 export default function ChooseLang() {
     const { t, i18n } = useTranslation();

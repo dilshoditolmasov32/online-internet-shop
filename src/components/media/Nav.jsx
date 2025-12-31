@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import "../../styles/scss/layout/nav.scss";
 import { ChevronLeft } from "lucide-react";
 
 export default function Nav({
@@ -40,7 +39,7 @@ export default function Nav({
             </Link>
           </div>
         </div>
-        <div className="nav__bottom">
+        {/* <div className="nav__bottom">
           <div className="nav__bottom-desc">
             <div className="nav__bottom-desc__wrap">
               {info ? (
@@ -116,7 +115,7 @@ export default function Nav({
               </p>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
        </div>
     </div>

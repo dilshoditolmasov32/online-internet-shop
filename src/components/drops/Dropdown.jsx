@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Combobox, ComboboxInput, ComboboxButton, ComboboxOptions, ComboboxOption } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
-import '../scss/dropdown.scss'
 import { useTranslation } from 'react-i18next'
 
 const cities = [

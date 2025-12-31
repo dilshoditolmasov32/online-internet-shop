@@ -1,25 +1,43 @@
 import { useState } from "react";
-import { addToCart } from "../api/cart.service"; 
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../service/cart.service";
+import { fetchCart } from "../store/cart";
+
 const useCart = () => {
+  const dispatch = useDispatch();
+  const { cart, loading: cartLoading } = useSelector((s) => s.cart);
+  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const addItem = async (productId, quantity) => {
+ const getCart = () => {
+    dispatch(fetchCart());
+  };
+
+  const addItem = async (productId, quantity = 1) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await addToCart(productId, quantity);
-      // Bu yerda agar Redux yoki Context bo'lsa, savatni yangilash kodi bo'ladi
-      return response.data;
+      await addToCart(productId, quantity);
+      dispatch(fetchCart());
     } catch (err) {
-      setError(err.message);
-      throw err; // Xatoni komponentga uzatamiz
+      setError(err.response?.data || err.message);
+      throw err;
     } finally {
       setLoading(false);
     }
   };
 
-  return { addItem, loading, error };
+  return {
+   cart: cart, 
+    cartItems: cart?.data?.items || [], 
+    fullCart: cart?.data,
+    getCart,
+    addItem,
+    loading: loading || cartLoading,
+    error,
+  };
 };
 
 export default useCart;

@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 const PhoneInput = ({ phone, setPhone }) => {
     const { i18n, t } = useTranslation()
-    const [isFocused, setIsFocused] = useState(false); // Контроль фокуса
+    const [isFocused, setIsFocused] = useState(false); 
 
     const formatPhoneNumber = (value) => {
         let cleaned = value.replace(/\D/g, "");
-        // Добавляем +998, если его нет
         if (!cleaned.startsWith("998")) {
             cleaned = "998" + cleaned;
         }
@@ -40,7 +39,7 @@ const PhoneInput = ({ phone, setPhone }) => {
     return (
         <input
             type="tel"
-            className='create__input-inp'
+            className="phone-input"
             value={phone}
             onChange={handleChange}
             onFocus={handleFocus}

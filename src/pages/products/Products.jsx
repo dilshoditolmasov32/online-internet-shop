@@ -4,7 +4,7 @@ import useProducts from "../../hooks/useProducts.jsx";
 import useCategories from "../../hooks/useCategories.jsx";
 import ProdsMain from "../../components/products/ProductsMain.jsx";
 
-export default function Prods() {
+export default function Prods({addToCart}) {
     const { categories } = useCategories();
 const t =useTranslation()
     const [filters, setFilters] = useState({
@@ -14,6 +14,7 @@ const t =useTranslation()
         search: '',
         page: 1,
     });
+
 
 
     const handleChange = useCallback((e) => {
@@ -55,6 +56,7 @@ const t =useTranslation()
                 setCurrentPage={setCurrentPage}
                 activeStatus={activeStatus}
                 setActiveStatus={setActiveStatus}
+                addToCart={addToCart}
             />
         </>
     );

@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import AcountInput from "../components/inputs/AcountInput.jsx";
-import "../styles/scss/vendors/create.scss";
-import api from "../api/axios.js";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import AcountInput from "../components/inputs/AcountInput.jsx";
+import { useOtp } from "../hooks/useOtp.jsx";
 
 export default function Create({
   title,
@@ -10,75 +9,56 @@ export default function Create({
   setBack,
   phone,
   setPhone,
-  setFullName,
+  fullName,
 }) {
   const { t } = useTranslation();
-
+  const { requestOtp, verifyOtp, loading, error } = useOtp();
   useEffect(() => {
     setBack(false);
-    title(t("enterPhoneNumber"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    title(t("Telefon raqamingizni kiriting"));
+  }, [setBack, title, t]);
 
-  const handleRegister = async () => {
-    try {
-      let cleanPhone = phone ? phone.replace(/\s/g, "") : "";
-      if (cleanPhone.startsWith("+")) {
-        cleanPhone = cleanPhone.slice(1);
-      }
-
-      const response = await fetch(`${api}/auth/send-code/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: cleanPhone }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        alert(`Ошибка: ${errorData.error || "Неизвестная ошибка"}`);
-        return;
-      }
-
-      const data = await response.json();
-      console.log("Ответ от сервера:", data);
-      setPhone(cleanPhone);
+  const handleNextStep = async () => {
+    const cleanPhone = phone.replace(/\D/g, "");
+    const result = await requestOtp(cleanPhone, fullName);
+    if (result.success) {
       setCurrent("code");
-    } catch (error) {
-      console.error("Ошибка при отправке запроса:", error);
-      alert("Tarmoq xatosi!");
     }
   };
+
+  const isFormValid =
+    phone.replace(/\D/g, "").length >= 12 && fullName.trim().length >= 3;
 
   return (
     <div className="create__wrap">
       <div className="create__input">
-        <p className="create__input-text">{t("firstLastName")}</p>
-        <input
-          type="text"
-          onChange={(e) => {
-            setFullName(e.target.value);
-          }}
-          className="create__input-inp"
-        />
-      </div>
-      <div className="create__input">
         <p className="create__input-text">
-          {t("tel")} <span>{t("codeSendViaTgBot")}</span>
+          {t("Telefon")}.{" "}
+          <span>{t("Tasdiqlash kodini telegram bot orqali yuboramiz.")}</span>
         </p>
         <AcountInput phone={phone} setPhone={setPhone} />
       </div>
-      <button className="create__btn" onClick={handleRegister}>
-        {t("createAcc")}
-      </button>
-      <p className="create__text">
-        {t("haveAcc")}{" "}
-        <span
-          onClick={() => {
-            setCurrent("login");
-          }}
-          className="create__link"
+      {error && (
+        <div
+          className="create__error-message"
+          style={{ color: "red", marginTop: "10px", fontSize: "14px" }}
         >
-          {t("login")}
+          {error}
+        </div>
+      )}
+
+      <button
+        className="create__btn"
+        onClick={handleNextStep}
+        disabled={loading || !isFormValid}
+      >
+        {loading ? t("Yuborilmoqda...") : t("Ro'yxatdan o'tish")}
+      </button>
+
+      <p className="create__footer-text">
+        {t("Akkauntingiz bormi?")}{" "}
+        <span onClick={() => setCurrent("login")} className="create__link">
+          {t("Akkauntga kirish")}
         </span>
       </p>
     </div>

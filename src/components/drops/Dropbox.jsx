@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../scss/dropbox.scss'
 
 const Dropbox = ({ array, selected }) => {
     const [isOpen, setIsOpen] = useState(false);

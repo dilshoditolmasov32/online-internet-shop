@@ -8,7 +8,6 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Savatni backenddan yuklash
   const fetchCart = async () => {
     try {
       const res = await getCart();
@@ -18,12 +17,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Savatga qo'shish funksiyasi
   const addItem = async (productId, quantity) => {
     setLoading(true);
     try {
       await addToCart(productId, quantity);
-      await fetchCart(); // Qo'shilgandan keyin savatni yangilaymiz
+      await fetchCart(); 
       toast.success("Savatga qo'shildi!");
     } catch (err) {
       toast.error(err.message || "Xatolik yuz berdi");

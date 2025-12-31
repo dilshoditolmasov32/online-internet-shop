@@ -1,42 +1,40 @@
-import React, { useContext, useState, useEffect } from "react";
+import { IoClose } from "react-icons/io5";
+import { useContext, useState, useEffect } from "react";
+import Username from "../components/inputs/Username";
 import { AuthContext } from "./context/AuthContext";
 import Create from "./Create";
 import Login from "./Login";
 import Code from "./Code";
 import left from "../assets/img/left.svg";
-import cls from "../assets/img/close.svg";
-import "../styles/scss/pages/auth.scss"
+
 
 export default function Auth() {
   const { isAuthOpen, closeAuth, login } = useContext(AuthContext);
 
   const [current, setCurrent] = useState("create");
   const [backBtn, setBackBtn] = useState(false);
-  const [title, setTitle] = useState("Create account");
+  const [title, setTitle] = useState("Telefon raqamingizni kiriting");
   const [phone, setPhone] = useState("");
   const [fullName, setFullName] = useState("");
 
-  // Modal ochiq/yopiq bo'lganda body scroll ni boshqarish
   useEffect(() => {
     if (isAuthOpen) {
-      // Modal ochilganda scroll o'chirish
-      document.body.style.overflow = 'hidden';
-      document.body.classList.add('modal-open');
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("modal-open");
     } else {
-      // Modal yopilganda scroll qaytarish
-      document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
+      document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     }
 
-    // Cleanup function
     return () => {
-      document.body.style.overflow = '';
-      document.body.classList.remove('modal-open');
+      document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     };
   }, [isAuthOpen]);
 
-  if (!isAuthOpen) return null;
-  
+ if (!isAuthOpen) return null;
+
+
   return (
     <div className="auth__outer">
       <div className="auth" onClick={() => closeAuth()}>
@@ -57,20 +55,33 @@ export default function Auth() {
               ) : null}
               {title}
             </p>
-            <img src={cls} onClick={() => closeAuth()} alt="close" />
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closeAuth();
+              }}
+              className="close-btn"
+              type="button"
+            >
+              <IoClose size={30} color="black" />
+            </button>
           </div>
 
           <div className="auth__child">
             {current === "create" ? (
-              <Create
-                title={setTitle}
-                setCurrent={setCurrent}
-                setBack={setBackBtn}
-                phone={phone}
-                setPhone={setPhone}
-                setFullName={setFullName}
-                login={login}
-              />
+              <>
+                <Username fullName={fullName} setFullName={setFullName} />
+                <Create
+                  title={setTitle}
+                  setCurrent={setCurrent}
+                  setBack={setBackBtn}
+                  phone={phone}
+                  setPhone={setPhone}
+                  setFullName={setFullName}
+                  login={login}
+                  fullName={fullName}
+                />
+              </>
             ) : current === "login" ? (
               <Login
                 title={setTitle}

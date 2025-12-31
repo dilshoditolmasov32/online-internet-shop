@@ -1,69 +1,87 @@
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import AOS from "aos";
+import { useEffect, useState, lazy, Suspense } from "react";
+import { ToastContainer, Zoom } from "react-toastify";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "./components/header/Header";
-import HeaderAdaptNav from "./components/header/HeaderAdaptNav";
 import Footer from "./components/footer/Footer";
 import MediaNav from "./components/media/MediaNav.jsx";
-import ProtectedRoute from "./auth/context/ProtectedRoute.jsx";
+
 import Auth from "./auth/Auth";
+import ProtectedRoute from "./auth/context/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/context/AuthContext";
-import {
-  Basket,
-  Home,
-  NotFoundPage,
-  Products,
-  SingleProduct,
-  UserProfile,
-} from "./pages";
-import "./styles/scss/main.scss";
-import { ToastContainer } from "react-toastify";
-import { useEffect, useState } from "react";
-import AOS from "aos";
+
+import "./styles/scss/main.css";
 import "aos/dist/aos.css";
+
+const Home = lazy(() => import("./pages/home/Home.jsx"));
+const Products = lazy(() => import("./pages/products/Products"));
+const SingleProduct = lazy(() => import("./pages/single-page/SingleProduct"));
+const Basket = lazy(() => import("./pages/basket/Basket.jsx"));
+const UserProfile = lazy(() => import("./pages/account/UserProfile"));
+const NotFoundPage = lazy(() => import("./pages/404/NotFoundPage.jsx"));
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: false,
     });
   }, []);
+
   return (
     <AuthProvider>
-      <Auth />
-      <Header
-        st={isSearch}
-        sfunc={setIsSearch}
-        state={isOpen}
-        func={setIsOpen}
-      />
+      <Suspense
+        fallback={<p style={{ textAlign: "center" }}>Yuklanmoqda...</p>}
+      >
+        <Auth />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<SingleProduct />} />
-        <Route path="/products" element={<Products />} />
-
-        <Route path="/basket" element={<Basket />} />
-
-        <Route
-          path="/account/profile"
-          element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>
-          }
+        <Header
+          st={isSearch}
+          sfunc={setIsSearch}
+          state={isOpen}
+          func={setIsOpen}
         />
 
-        <Route path="/auth" element={<Auth />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/basket" element={<Basket />} />
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route
+            path="/account/profile"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/auth" element={<Auth />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
 
       <Footer />
       <MediaNav />
 
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={7000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Zoom}
+      />
     </AuthProvider>
   );
 }

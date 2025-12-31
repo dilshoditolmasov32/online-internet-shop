@@ -4,7 +4,6 @@ import ArrowDownBlue from "../../assets/img/arrowDownBlue.svg";
 import filter from "../../assets/img/filter.svg";
 import close from "../../assets/img/close.svg";
 import CategDropdown from "../categories/CategoryDropdown";
-import "../../styles/scss/components/prodsMainAdapt.scss";
 
 export default function ProdsMainAdapt({
   categs = [],

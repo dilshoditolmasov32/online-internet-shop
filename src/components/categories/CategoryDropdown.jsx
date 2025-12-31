@@ -8,10 +8,11 @@ import Checkbox from "@mui/material/Checkbox";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { NumericFormat } from "react-number-format";
 import TextField from "@mui/material/TextField";
-
-import "../../styles/scss/components/subCategory.scss";
+import useCategories from "../../hooks/useCategories";
 
 export default function CategoryDropdown() {
+  const { categories } = useCategories();
+  console.log(categories, "accordion");
   const [checkedItems, setCheckedItems] = useState({});
   const [values, setValues] = useState({
     numberformatOne: "1000",
@@ -31,54 +32,7 @@ export default function CategoryDropdown() {
       [id]: !prev[id],
     }));
   };
-  const categories = [
-    {
-      id: "1",
-      title: "Yotoqxona mebellari",
-      subcategories: [
-        { id: "1-1", name: "Krovatlar" },
-        { id: "1-2", name: "Shkaflar" },
-        { id: "1-3", name: "Tumba va komodlar" },
-      ],
-    },
-    {
-      id: "2",
-      title: "Oshxona mebellari",
-      subcategories: [
-        { id: "2-1", name: "Stol va stullar" },
-        { id: "2-2", name: "Oshxona garniturlari" },
-        { id: "2-3", name: "Shkafchalar" },
-      ],
-    },
-    {
-      id: "3",
-      title: "Mehmon xona mebellari",
-      subcategories: [
-        { id: "3-1", name: "Divanlar" },
-        { id: "3-2", name: "Kreslolar" },
-        { id: "3-3", name: "Stollar" },
-      ],
-    },
-    {
-      id: "4",
-      title: "Ofis mebellari",
-      subcategories: [
-        { id: "4-1", name: "Ish stollari" },
-        { id: "4-2", name: "Ofis stullari" },
-        { id: "4-3", name: "Javonlar" },
-      ],
-    },
-    {
-      id: "5",
-      title: "Bolalar xonasi mebellari",
-      subcategories: [
-        { id: "5-1", name: "Bolalar krovatlari" },
-        { id: "5-2", name: "O‘yinchoq javonlari" },
-        { id: "5-3", name: "Stol va stullar" },
-      ],
-    },
-  ];
-
+ 
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -135,13 +89,15 @@ export default function CategoryDropdown() {
                   },
                 }}
               >
-                {category.title}
+                {category.name}
               </Typography>
             </AccordionSummary>
 
-            {category?.subcategories?.map((el) => (
+            {category?.translations?.map((el) => (
               <div className="subcategory-list" key={el.id}>
-                <p>{el.name}</p>
+                <>
+                  <p> {el.name}</p>
+                </>
                 <Checkbox
                   checked={!!checkedItems[el.id]}
                   onChange={() => handleCheckBoxChange(el.id)}
@@ -247,14 +203,13 @@ export default function CategoryDropdown() {
             />
 
             <NumericFormat
-              
               onChange={handleChange}
               customInput={TextField}
               thousandSeparator=" "
               valueIsNumericString
               variant="standard"
               placeholder="до"
-                 color="#B9B9B9"
+              color="#B9B9B9"
               InputProps={{ disableUnderline: true }}
               sx={{
                 backgroundColor: "#FFFFFF",

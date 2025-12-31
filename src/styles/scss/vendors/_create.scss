@@ -1,0 +1,141 @@
+.create {
+  &__text {
+    text-align: center;
+  }
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+  }
+
+  &__input-text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #818181;
+    margin-bottom: 10px;
+
+    span {
+      color: #10355b;
+    }
+  }
+
+  &__btn {
+    padding: 16px 18px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    color: #ffffff;
+    background-color: #10355b;
+    border-radius: 12px;
+    margin: 24px 0;
+    transition: 0.3s;
+    &:disabled {
+      background: cccccc;
+      color: #fff;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__bot-card {
+    background: #fcfcfc;
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__bot-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 5px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__bot-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  &__bot-desc {
+    font-size: 14px;
+    color: #757575;
+    line-height: 1.5;
+    max-width: 300px;
+    margin-bottom: 10px;
+  }
+
+  &__tg-button {
+    width: 100%;
+    background: #0088cc;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    .btn-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &:hover {
+      background: #007bb8;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__footer-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #818181;
+    font-size: 16px;
+  }
+
+  &__link {
+    color: #10355b;
+    cursor: pointer;
+    margin-left: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    transition: text-decoration 0.5s ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

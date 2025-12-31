@@ -6,7 +6,6 @@ import qrCode from "../../assets/img/qr.svg";
 import telephone from "../../assets/img/smallCallIcon.svg";
 import appStore from "../../assets/img/appstore.svg";
 import playMarket from "../../assets/img/pm.svg";
-import "../../styles/scss/layout/footer.scss";
 import { FaFacebookF, FaTelegramPlane } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
 import { AiFillYoutube } from "react-icons/ai";

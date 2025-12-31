@@ -5,7 +5,6 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import CheckIcon from "@mui/icons-material/Check";
 import userAboutIcon from "../../assets/img/user-about.svg";
 import locationIcon from "../../assets/img/location.svg";
-import "../../styles/scss/pages/profileInfo.scss";
 
 const optionSx = {
   px: 2.5,

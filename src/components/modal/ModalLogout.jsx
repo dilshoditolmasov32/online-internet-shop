@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import "../../styles/scss/vendors/modal.scss";
 import { useLocation, useNavigate } from "react-router";
 
 export default function ModalLogout({ onConfirm, onClose, onCloseFunc }) {

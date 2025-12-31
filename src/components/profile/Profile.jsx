@@ -4,7 +4,6 @@ import axios from 'axios';
 import info from '../../assets/img/info.svg';
 import loc from '../../assets/img/loc.svg';
 import ChooseCity from '../tools/ChooseCity.jsx';
-// import '../scss/profile.scss';
 import useAuthMe from '../../hooks/useAuthMe.jsx';
 import API_BASE_URL from "../../apiConfig.js";
 

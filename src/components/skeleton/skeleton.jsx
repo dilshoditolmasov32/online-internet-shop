@@ -1,18 +1,17 @@
-import { memo } from "react"
-import "./skeleton.css"
+export default function Skeleton({ count = 12 }) {
+  const skeletonArray = Array(count).fill(0);
 
-function Skeleton({count}) {
   return (
-    <div className='skeleton__wrapper container'>
-        {
-            Array(count).fill("").map((_, inx)=>  <div key={inx} className="skeleton__card">
+    <div className="container">
+      <div className="skeleton__wrapper">
+        {skeletonArray.map((_, index) => (
+          <div className="skeleton__card" key={index}>
             <div className="skeleton__image skeleton__anime"></div>
             <div className="skeleton__title skeleton__anime"></div>
             <div className="skeleton__price skeleton__anime"></div>
-        </div>)
-        }
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
-
-export default memo(Skeleton)

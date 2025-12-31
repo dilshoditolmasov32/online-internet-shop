@@ -1,12 +1,59 @@
-@import "vendors/cart.scss";
+
 @import "layout/header.scss";
 @import "layout/footer.scss";
 @import "layout/form.scss";
 @import "layout/nav.scss";
+
+@import "./pages/account";
+@import "./pages/auth";
+@import "./pages/basket";
+@import "./pages/login";
+@import "./pages/notfound";
+@import "./pages/orderHistory";
+@import "./pages/profile";
+@import "./pages/profileInfo";
+@import "./pages/userProfile";
+
 @import "components/slider.scss";
 @import "components/slide.scss";
-@import "vendors/layout.scss";
+@import "components/catalogButton";
+@import "components/fullScreenZoom";
+@import "components/lang";
+@import "components/langL";
+@import "components/loading";
+@import "components/mediaNav";
+@import "components/noprods";
+@import "components/mediaNav";
+@import "components/order";
+@import "components/orders";
+@import "components/prod";
+@import "components/prodslide";
+@import "components/prodsMain";
+@import "components/prodsMainAdapt";
+@import "components/product";
+@import "components/products";
+@import "components/subCategory";
+@import "components/search";
+@import "components/tost";
+
 @import "base/font";
+@import "base/loading-spinner";
+
+@import "vendors/layout.scss";
+@import "vendors/cart";
+@import "vendors/categories";
+@import "vendors/categoryCard";
+@import "vendors/categoryDropdown";
+@import "vendors/chooseCity";
+@import "vendors/cityDrop";
+@import "vendors/code";
+@import "vendors/create";
+@import "vendors/dropbox";
+@import "vendors/dropdown";
+@import "vendors/modal";
+
+
+@import "./theme/filterButton";
 
 
 body {

@@ -7,7 +7,6 @@ import checkIcon from "../../assets/img/check.svg";
 import cancelIcon from "../../assets/img/orderCancelIcon.svg";
 import durationIcon from "../../assets/img/durationIcon.svg";
 import productOrderImage from "../../assets/img/productPhoto.png";
-import "../../styles/scss/pages/orderHistory.scss";
 
 export default function OrdersHistory() {
   const orderProducts = [

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "../../styles/scss/vendors/cityDrop.scss";
 import galka from "../../assets/img/galka.svg";
 
 const Dropbox = ({ array, selected, curr }) => {

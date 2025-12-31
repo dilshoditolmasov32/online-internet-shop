@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import useAuthMe from "../../hooks/useAuthMe.jsx";
-import "../../styles/scss/base/loading-spinner.scss";
 
 const ProtectedRoute = ({ children }) => {
   const { userMe, error, loading } = useAuthMe();
@@ -15,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (error || !userMe) {
-    return <Navigate to="/auth" replace />;
+    return <Navigate to="/profile" replace />;
   }
 
   return children;

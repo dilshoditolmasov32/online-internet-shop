@@ -1,133 +1,77 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
+  const checkAuth = useCallback(async () => {
+    const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
 
-  const checkAuth = async () => {
     try {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me/`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
-        } else {
-          localStorage.removeItem('token');
-          setUser(null);
-        }
-      }
-    } catch (error) {
-      console.error('Auth check error:', error);
-      localStorage.removeItem('token');
+      const { data } = await api.get("customer/get");
+      setUser(data);
+    } catch {
+      localStorage.removeItem("token");
       setUser(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const login = async (data) => {
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  const login = async (response) => {
     try {
-      if (data.access) {
-        localStorage.setItem('token', data.access);
-        
-        if (data.refresh) {
-          localStorage.setItem('refreshToken', data.refresh);
-        }
+      if (!response?.token) return false;
 
-        const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/auth/me/`, {
-          headers: {
-            'Authorization': `Bearer ${data.access}`,
-            'Content-Type': 'application/json'
-          }
-        });
+      localStorage.setItem("token", response.token);
 
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          setUser(userData);
-          closeAuth();
-          navigate('/account/profile');
-          return true;
-        }
-      }
-      return false;
+      setUser(response.data);
+
+      closeAuth();
+      navigate("/account/profile");
+      return true;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       return false;
     }
   };
 
-  // Logout funksiyasi
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    setUser(null);
-    navigate('/');
+    navigate("/");
   };
 
-  // Auth modalini ochish
-  const openAuth = () => {
-    setIsAuthOpen(true);
-  };
-
-  // Auth modalini yopish
-  const closeAuth = () => {
-    setIsAuthOpen(false);
-  };
-
-  // Token yangilash (refresh token bilan)
-  const refreshToken = async () => {
-    try {
-      const refresh = localStorage.getItem('refreshToken');
-      if (!refresh) return false;
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/token/refresh/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ refresh })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.access);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('Token refresh error:', error);
-      return false;
-    }
-  };
-
-  const value = {
-    user,
-    isAuthOpen,
-    loading,
-    login,
-    logout,
-    openAuth,
-    closeAuth,
-    checkAuth,
-    refreshToken
-  };
+  const openAuth = () => setIsAuthOpen(true);
+  const closeAuth = () => setIsAuthOpen(false);
+if (loading) return null; 
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        isAuthOpen,
+        login,
+        logout,
+        openAuth,
+        closeAuth,
+        checkAuth,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

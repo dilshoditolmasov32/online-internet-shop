@@ -1,47 +1,46 @@
-import { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import api from '../api/axios';
+import { useState, useEffect, useCallback } from "react";
+import api from "../api/axios";
 
 const useAuthMe = () => {
-    const [userMe, setUserMe] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const token = localStorage.getItem('token');
+  const [userMe, setUserMe] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const fetchUserMe = useCallback(async () => {
-        if (!token) {
-            setUserMe(null);
-            setLoading(false);
-            return;
-        }
+  const fetchUserMe = useCallback(async () => {
+    const token = localStorage.getItem("token");
 
-        setLoading(true);
-        try {
-            const response = await axios.get(`${api}/auth/users/me/`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setUserMe(response.data);
-            setError(null);
-        } catch (err) {
-            if (err.response?.status === 401) {
-                localStorage.removeItem('token');
-                setUserMe(null);
-            }
-            setError(err);
+    if (!token) {
+      setUserMe(null);
+      setLoading(false);
+      return;
+    }
 
-           
-        } finally {
-            setLoading(false);
-        }
+    try {
+      setLoading(true);
+      const { data } = await api.get("customer/get");
+      setUserMe(data);
+      setError(null);
+    } catch (err) {
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+        setUserMe(null);
+      }
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
+    fetchUserMe();
+  }, [fetchUserMe]);
 
-    }, [token]);
-
-    useEffect(() => {
-        fetchUserMe();
-    }, [fetchUserMe]);
-
-    return { userMe, loading, error, refetch: fetchUserMe };
+  return {
+    userMe,
+    loading,
+    error,
+    refetch: fetchUserMe,
+  };
 };
 
 export default useAuthMe;

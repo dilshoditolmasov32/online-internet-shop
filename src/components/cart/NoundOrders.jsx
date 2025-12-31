@@ -1,5 +1,4 @@
 import bag from "../../assets/img/bag.svg";
-import "../../styles/scss/components/noprods.scss";
 import { useTranslation } from "react-i18next";
 
 export default function NoOrders() {

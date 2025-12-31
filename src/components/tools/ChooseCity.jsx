@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Dropbox from '../Dropbox';
-import '../../scss/ChooseCity.scss';
 import axios from "axios";
 import API_BASE_URL from "../../../apiConfig.js";
 import useAuthMe from '../../../hooks/useAuthMe.jsx';
 
 export default function ChooseCity({ setAdress }) {
-    const { userMe, refetch } = useAuthMe(); // Загружаем текущие данные пользователя
+    const { userMe, refetch } = useAuthMe();
     const districts = [
         'Olmazor tumani', 'Bektemir tumani', 'Mirobod tumani', 'Mirzo Ulug‘bek tumani',
         'Sergeli tumani', 'Chilonzor tumani', 'Shayxontohur tumani', 'Yunusobod tumani',

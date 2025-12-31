@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import useBasket from "../../hooks/useBasket.jsx";
 import locate from "../../assets/img/locateIcon.svg";
 import instagram from "../../assets/img/header-instagram-icon.svg";
 import facebook from "../../assets/img/header-facebook-icon.svg";
@@ -13,25 +12,23 @@ import searchLupa from "../../assets/img/searchLupa.svg";
 import ChooseLang from "../tools/ChooseLang.jsx";
 import CatalogMenu from "../catalog-button/Catalogbutton.jsx";
 import { AuthContext } from "../../auth/context/AuthContext.jsx";
-import { useCart } from "../cart/CartContext.jsx";
-import "../../styles/scss/layout/header.scss";
 import { Search, X } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+export default function Header({ st, sfunc, state, func, setSearchQuery }) {
+ const { user, openAuth } = useContext(AuthContext);
+const { t } = useTranslation();
+const dispatch = useDispatch(); 
+const cart = useSelector((state) => state.cart.cart);
 
-export default function Header({ st, sfunc, state, func }) {
-  const { user, openAuth, logout } = useContext(AuthContext);
-  const { t } = useTranslation();
-  const { basket, fetchBasket } = useBasket();
-  const { cartItems } = useCart(); 
-  const count = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-  useEffect(() => {
-    fetchBasket();
-  }, []);
+  const items = Array.isArray(cart?.data?.items) ? cart.data.items : [];
 
- 
+  const totalCount = useMemo(() => {
+    return items.reduce((total, item) => total + (item.quantity || 0), 0);
+  }, [items]);
 
   return (
-    <div className="header" data-aos="fade-down">
+    <div className="header">
       <div className="header__wrap">
         <div className="header__top">
           <div className="container">
@@ -112,6 +109,7 @@ export default function Header({ st, sfunc, state, func }) {
                     type="text"
                     className="header__main-center__search-input"
                     placeholder={t("Qidirish")}
+                    onChange={(e) => dispatch(setSearchQuery(e.target.value))}
                   />
 
                   <button className="header__main-center__search-button">
@@ -121,39 +119,49 @@ export default function Header({ st, sfunc, state, func }) {
               </div>
               <div className="header__main-nav">
                 {user ? (
-                  <div className="header__main-nav__elem header__user">
+                  <Link
+                    to="/account/profile"
+                    className="header__main-nav__elem header__user"
+                  >
                     <img src={userIcon} alt="user-icon" />
                     <div className="header__user-info">
-                      <Link to="/account/profile" className="header__user-name">
+                      <span className="header__user-name">
                         {user.full_name || user.username}
-                      </Link>
-                      <button onClick={logout} className="header__logout-btn">
-                        {t("logout")}
+                      </span>
+                      <button  className="exit-btn">
+                        {t("Profil")}
                       </button>
                     </div>
-                  </div>
+                  </Link>
                 ) : (
-                  <div
-                    className="header__main-nav__elem header__login-btn"
+                  <button
+                    className="login-btn"
                     onClick={openAuth}
                   >
                     <img src={userIcon} alt="user-icon" />
                     <p className="header__main-nav__elem-text">Kirish</p>
-                  </div>
+                  </button>
                 )}
 
-             <Link className="link" to="/basket">
-      <div className="header__main-nav__elem">
-        <img src={smallBasket} alt="basket icon" />
-        <p className="header__main-nav__elem-text">{t("cart")}</p>
-        
-        {count > 0 && (
-          <div className="header__main-nav__elem-span">
-            {count}
-          </div>
-        )}
-      </div>
-    </Link>
+                <div
+                  className="link"
+                  onClick={(e) => {
+                    if (!user) {
+                      e.preventDefault();
+                      openAuth();
+                    }
+                  }}
+                >
+                  <Link to={user ? "/basket" : "#"}>
+                    <div className="header__main-nav__elem">
+                      <img src={smallBasket} alt="basket icon" />
+                      <p className="header__main-nav__elem-text">{t("cart")}</p>
+                      <div className="header__main-nav__elem-span">
+                        {totalCount}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

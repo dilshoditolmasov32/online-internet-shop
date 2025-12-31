@@ -1,35 +1,33 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 export default function CodeInput({ length = 6, code, setCode }) {
   const inputsRef = useRef([]);
 
   const handleChange = (index, value) => {
-    if (!/^\d?$/.test(value)) return; // Разрешаем только цифры или пустую строку
+    const val = value.replace(/\D/g, "");
+    if (!val && value !== "") return;
 
     const newCode = [...code];
-    newCode[index] = value;
-
+    newCode[index] = val.slice(-1);
     setCode(newCode);
 
-    // Переключение на следующий инпут
-    if (value && index < length - 1) {
-      const next = inputsRef.current[index + 1];
-      if (next) next.focus();
+    if (val && index < length - 1) {
+      inputsRef.current[index + 1]?.focus();
     }
   };
 
+const handlePaste = (e) => {
+  e.preventDefault();
+  const pasteData = e.clipboardData.getData("text"); 
+  const pasteValues = pasteData.split("").filter(char => /\d/.test(char)); 
+};
   const handleKeyDown = (index, e) => {
     if (e.key === "Backspace") {
-      if (code[index]) {
-        // очищаем текущую ячейку
+      if (!code[index] && index > 0) {
         const newCode = [...code];
-        newCode[index] = "";
+        newCode[index - 1] = ""; 
         setCode(newCode);
-        return;
-      }
-      if (index > 0) {
-        const prev = inputsRef.current[index - 1];
-        if (prev) prev.focus();
+        inputsRef.current[index - 1]?.focus();
       }
     } else if (e.key === "ArrowLeft" && index > 0) {
       inputsRef.current[index - 1]?.focus();
@@ -39,21 +37,21 @@ export default function CodeInput({ length = 6, code, setCode }) {
   };
 
   return (
-    <>
+    <div className="code__inputs-row" style={{ display: 'flex', gap: '8px' }}>
       {Array.from({ length }).map((_, index) => (
         <input
           key={index}
           ref={(el) => (inputsRef.current[index] = el)}
           type="text"
           inputMode="numeric"
-          pattern="[0-9]*"
           value={code[index] || ""}
           maxLength={1}
-          className="code__input"
-          onChange={(e) => handleChange(index, e.target.value.replace(/\D/g, ""))}
+          className="code__input-box"
+          onChange={(e) => handleChange(index, e.target.value)}
           onKeyDown={(e) => handleKeyDown(index, e)}
+          onPaste={handlePaste} 
         />
       ))}
-    </>
+    </div>
   );
 }

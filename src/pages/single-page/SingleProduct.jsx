@@ -1,30 +1,26 @@
 import ProductIdSlider from "../../components/productSlider/ProductIdSlider.jsx";
 import Nav from "../../components/media/Nav.jsx";
 import Products from "../../components/products/Products.jsx";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import useAddCartItem from "../../hooks/useAddCartItem.jsx";
-import useAuthMe from "../../hooks/useAuthMe.jsx";
 
 import box from "../../assets/img/box.svg";
 import defaultImg from "../../assets/img/defaultImg.svg";
 import shield from "../../assets/img/shield.svg";
-import successIcon from "../../assets/img/toast.svg";
 import wallet from "../../assets/img/wallet.svg";
 
-import "../../styles/scss/components/prod.scss";
-import { getProductId } from "../../api/product.service.js";
+import { getProductId } from "../../service/product.service.js";
+import { AuthContext } from "../../auth/context/AuthContext.jsx";
 
 export default function SingleProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { user, openAuth } = useContext(AuthContext);
 
-  const { addCartItem } = useAddCartItem();
-  const { userMe, error: authError } = useAuthMe();
 
   const [product, setProduct] = useState(null);
   const [currentImg, setCurrentImg] = useState(defaultImg);
@@ -35,14 +31,12 @@ export default function SingleProduct() {
     const loadProduct = async () => {
       try {
         const res = await getProductId(id);
-        console.log(res.data.data);
         setProduct(res.data.data);
 
         if (res.data?.base_image?.large_image_url) {
           setCurrentImg(res.data.base_image.large_image_url);
         }
       } catch (err) {
-        console.error(err);
         setError("Ошибка загрузки продукта");
       } finally {
         setLoading(false);
@@ -53,32 +47,40 @@ export default function SingleProduct() {
   }, [id]);
 
   const handleBuy = () => {
-    toast(
-      <div className="toast-message">
-        <img src={successIcon} alt="success" />
-        <span>Успешно отправлено на проверку</span>
-      </div>,
-      {
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeButton: false,
-        icon: false,
-      }
+    toast.success("Muvaqqiyatli amalga oshirildi");
+  };
+
+  const handleAddToCart = () => {
+    navigate("/basket")
+  };
+
+  if (loading) {
+    return (
+      <div className="product-page skeleton-page">
+        <div className="container">
+          <div className="skeleton-nav"></div>
+
+          <div className="productId-page">
+            <div className="sliderId-component">
+              <div className="skeleton-slider"></div>
+
+              <div className="product-info">
+                <div className="skeleton-line title"></div>
+                <div className="skeleton-line text"></div>
+                <div className="skeleton-line text"></div>
+                <div className="skeleton-line text"></div>
+              </div>
+            </div>
+
+            <div className="product-sidebar">
+              <div className="skeleton-box"></div>
+              <div className="skeleton-features"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
-  };
-
-  const handleAddToCart = async () => {
-    if (authError) return navigate("/auth");
-
-    try {
-      await addCartItem({ product_id: product.id, amount: 1 });
-      navigate("/basket");
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  if (loading) return <p>Загрузка...</p>;
+  }
   if (error) return <p>{error}</p>;
   if (!product) return <p>Продукт не найден</p>;
 
@@ -136,12 +138,15 @@ export default function SingleProduct() {
                   {t("addToCart")}
                 </button>
 
-                <button
-                  onClick={() => (userMe ? handleBuy() : navigate("/auth"))}
-                  disabled={!product.in_stock}
-                >
-                  {t("buyBtn")}
-                </button>
+                {user ? (
+                  <button onClick={handleBuy} disabled={!product.in_stock}>
+                    {t("buyBtn")}
+                  </button>
+                ) : (
+                  <button onClick={openAuth} disabled={!product.in_stock}>
+                    {t("buyBtn")}
+                  </button>
+                )}
               </div>
             </div>
 

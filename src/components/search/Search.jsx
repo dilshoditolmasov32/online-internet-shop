@@ -1,6 +1,4 @@
 import { useState } from "react";
-import time from "../../assets/img/time.svg";
-import "../../styles/scss/components/search.scss";
 
 export default function Search() {
   const [hist, setHist] = useState(["sdd", "dssd", "sdsd"]);

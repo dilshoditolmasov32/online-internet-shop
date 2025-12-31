@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 
-import CategoryCard from "./CategoryCard.jsx";
 import useCategories from "../../hooks/useCategories.jsx";
 import { useTranslation } from "react-i18next";
 import arrowR from "../../assets/img/arrowR.svg";
-import "../../styles/scss/vendors/categories.scss";
 
 export default function Categories() {
   const { categories } = useCategories();
   const { t, i18n } = useTranslation();
+
+  console.log(categories, "categoru");
 
   return (
     <div className="categories">
@@ -25,9 +25,14 @@ export default function Categories() {
       </div>
       <div className="container">
         <div className="categories__wrap">
-          {categories.slice(0, 4).map((item, i) => (
-            <Link className="link" key={i} to="/products">
-              <CategoryCard info={item} />
+          {categories?.slice(0, 4)?.map((item) => (
+            <Link to={"/products"} className="card" key={item.id}>
+              <div className="card__wrap">
+                <div className="card__desc">
+                  <h3 className="card__desc-title">{item?.name}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: item?.description }} />
+                </div>
+              </div>
             </Link>
           ))}
         </div>

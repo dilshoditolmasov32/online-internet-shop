@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import '../scss/order.scss'
 import arrow from '../img/arrowDown.svg'
 import arrowUp from '../img/arrowUp.svg'
 

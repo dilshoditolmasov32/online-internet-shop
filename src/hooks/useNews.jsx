@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getNews } from "../api/news.service";
+import { getNews } from "../service/news.service";
 import i18n from "../i18n";
 import { withLang } from "../utils/withLang";
 

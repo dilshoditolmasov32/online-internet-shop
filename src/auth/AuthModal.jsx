@@ -1,50 +1,92 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { useTranslation } from "react-i18next";
+import { useContext, useState, useEffect } from "react";
 import Create from "./Create";
-import Login from "./Login";
+import { AuthContext } from "./context/AuthContext";
 import Code from "./Code";
+import Login from "./Login";
 
-export default function AuthModal({
-  // agar siz header ichida state bilan ishlashni davom ettirmoqchi bo'lsangiz
-  // bu componentni shu kod bilan App ga ko'chiring. Men context ichida isAuthOpen orqali boshqaraman.
-}) {
-  const {
-    isAuthOpen,
-    closeAuth,
-    login, // agar Login/Create ichida login chaqirilsa
-  } = useContext(AuthContext);
+export default function AuthModal() {
+  const { isAuthOpen, closeAuth, login } = useContext(AuthContext);
 
-  // local state for modal nav
-  const [current, setCurrent] = React.useState("create");
-  const [backBtn, setBackBtn] = React.useState(false);
-  const [title, setTitle] = React.useState("Create account");
-  const [phone, setPhone] = React.useState("");
-  const [fullName, setFullName] = React.useState("");
+  const { t } = useTranslation();
+
+  const [current, setCurrent] = useState("create");
+  const [backBtn, setBackBtn] = useState(false);
+  const [title, setTitle] = useState("");
+  const [phone, setPhone] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    if (!isAuthOpen) {
+      setCurrent("create");
+    }
+  }, [isAuthOpen]);
 
   if (!isAuthOpen) return null;
 
+  const handleBack = () => {
+    if (current === "code" || current === "login") {
+      setCurrent("create");
+      setBackBtn(false);
+    }
+  };
+
   return (
     <div className={isAuthOpen ? "auth__outer" : "auth__dis"}>
-      <div className="auth" onClick={() => { closeAuth(); }}>
-        <div className="auth__wrap" onClick={(e) => { e.stopPropagation(); }}>
+      <div className="auth" onClick={closeAuth}>
+        <div className="auth__wrap" onClick={(e) => e.stopPropagation()}>
           <div className="auth__desc">
-            <p className='auth__desc-text'>
-              {backBtn ? (<img onClick={()=>{ setCurrent('create'); setBackBtn(false); }} className='auth__desc-text__back' src={'/icons/left.svg'} alt="back" />) : null}
-              {title}
-            </p>
-            <img src={'/icons/close.svg'} onClick={() => { closeAuth(); }} alt="close" />
+            <div className="auth__desc-left">
+              {backBtn && (
+                <img
+                  onClick={handleBack}
+                  className="auth__desc-text__back"
+                  src={"/icons/left.svg"}
+                  alt="back"
+                />
+              )}
+              <p className="auth__desc-text">{title}</p>
+            </div>
+            <img
+              src={"/icons/close.svg"}
+              className="auth__close-icon"
+              onClick={closeAuth}
+              alt="close"
+            />
           </div>
+
           <div className="auth__child">
-            {
-              current === 'create' ? (
-                <Create title={setTitle} setCurrent={setCurrent} setBack={setBackBtn} phone={phone} setPhone={setPhone}
-                  setFullName={setFullName} />
-              ) : current === 'login' ? (
-                <Login title={setTitle} setCurrent={setCurrent} setBack={setBackBtn} phone={phone} setPhone={setPhone}/>
-              ) : current === 'code' ? (
-                <Code title={setTitle} setCurrent={setCurrent} setBack={setBackBtn} phone={phone} fullName={fullName}/>
-              ) : null
-            }
+            {current === "create" && (
+              <Create
+                title={setTitle}
+                setCurrent={setCurrent}
+                setBack={setBackBtn}
+                phone={phone} 
+                setPhone={setPhone} 
+                setFullName={setFullName}
+              />
+            )}
+
+            {current === "login" && (
+              <Login
+                title={setTitle}
+                setCurrent={setCurrent}
+                setBack={setBackBtn}
+                phone={phone}
+                setPhone={setPhone}
+              />
+            )}
+
+            {current === "code" && (
+              <Code
+                title={setTitle}
+                setCurrent={setCurrent}
+                setBack={setBackBtn}
+                phone={phone}
+                fullName={fullName}
+                login={login} // AuthContext'dan kelgan login funksiyasi
+              />
+            )}
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import {Link} from 'react-router'
-import '../../styles/scss/pages/notfound.scss'
 
 export default function NotFoundPage() {
   return (

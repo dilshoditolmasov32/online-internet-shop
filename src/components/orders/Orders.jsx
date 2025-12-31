@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../scss/orders.scss";
-import "../scss/order.scss";
-import img from "../img/ordersImg.png";
 import Order from "./Order.jsx";
 import useOrders from "../../hooks/useOrders.jsx";
 import NoOrders from "../cart/NoundOrders.jsx";
 import { useTranslation } from "react-i18next";
-import { m } from "framer-motion";
 
 export default function Orders() {
   const { orders: allOrders } = useOrders();
@@ -17,7 +13,6 @@ export default function Orders() {
 
   useEffect(() => {
     if (allOrders?.results) {
-      // Проверяем, что results существует
       setJarayonda(
         allOrders.results.filter((order) => order.status === "Jarayonda")
       );

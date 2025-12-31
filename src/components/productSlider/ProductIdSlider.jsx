@@ -5,7 +5,6 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import "../../styles/scss/components/slider.scss";
 import defaultImg from "../../assets/img/defaultImg.svg";
 
 export default function ProductIdSlider({ info = [], onSelect }) {

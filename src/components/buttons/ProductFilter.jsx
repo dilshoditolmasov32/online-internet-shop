@@ -1,7 +1,5 @@
-import React from 'react';
-import "../../styles/scss/theme/FilterButton.scss"
+import { useState } from "react"; 
 
-// Kichikroq filtrlash tugmasi komponenti
 const FilterButton = ({ label, isActive, onClick }) => {
   return (
     <button
@@ -14,7 +12,7 @@ const FilterButton = ({ label, isActive, onClick }) => {
 };
 
 const ProductFilter = () => {
-  const [activeFilter, setActiveFilter] = React.useState('Barchasi');
+  const [activeFilter, setActiveFilter] = useState('Barchasi');
 
   return (
     <div className="product-filter-container">
@@ -35,7 +33,7 @@ const ProductFilter = () => {
           isActive={activeFilter === 'Yangilik'}
           onClick={() => setActiveFilter('Yangilik')}
         />
-        {/* 'Barchasi' tugmasi rasmda aktiv (to'q rangli) holatda */}
+       
         <FilterButton
           label="Barchasi"
           isActive={activeFilter === 'Barchasi'}

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import '../../styles/scss/layout/form.scss'
 
-const PhoneInput = ({ changeTel }) => {
-    const [phone, setPhone] = useState(""); 
+const PhoneInput = ({ phone, setPhone }) => {
     const [isFocused, setIsFocused] = useState(false); 
     const { t, i18n } = useTranslation()
     const formatPhoneNumber = (value) => {

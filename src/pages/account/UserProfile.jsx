@@ -2,13 +2,9 @@ import { useState } from "react";
 import OrdersHistory from "./ProfileHistory";
 import ProfileInfo from "./ProfilInfo";
 import ModalLogout from "../../components/modal/ModalLogout.jsx";
-import "../../styles/scss/pages/account.scss";
-import api from "../../api/axios.js";
 import { t } from "i18next";
 import arrowIcon from "../../assets/img/arrowIcon.svg";
-import "../../styles/scss/pages/userProfile.scss";
 import { NavLink } from "react-router";
-import axios from "axios";
 
 const TABS = {
   PROFILE: "profile",
